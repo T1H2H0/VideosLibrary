@@ -1,0 +1,141 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+id'com.google.devtools.ksp'
+    id 'com.google.dagger.hilt.android'
+    id("org.jetbrains.kotlin.plugin.compose")
+id 'maven-publish'
+}
+
+android {
+    namespace 'com.t1h2h0.videos'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId "com.t1h2h0.videos"
+        minSdk 26
+        targetSdk 36
+        versionCode 1
+        versionName "0.0.1"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+    dataBinding {
+        enabled = true
+    }
+    buildFeatures {
+        viewBinding = true
+        // OR if you need more advanced data binding features:
+        // dataBinding = true
+        compose = true // Enable Jetpack Compose
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.7.0" // Match your Kotlin version and Compose compatibility
+    }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+
+}
+
+dependencies {
+    // AndroidX Core
+    implementation("androidx.core:core-ktx:1.13.1")
+
+    // Compose BOM
+    implementation(platform("androidx.compose:compose-bom:2024.06.00")) // Use the latest BOM here
+    androidTestImplementation(platform("androidx.compose:compose-bom:2024.06.00")) // And here
+
+    // Compose UI
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-graphics")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.compose.material3:material3") // Or material for older version
+    implementation("androidx.compose.material:material-icons-extended")
+
+    // Compose Activity
+    implementation("androidx.activity:activity-compose:1.9.0")
+    implementation("io.coil-kt.coil3:coil-compose:3.0.0-alpha06")
+    implementation("io.coil-kt.coil3:coil-network-okhttp:3.0.0-alpha06") // Add this
+
+    // Compose ViewModel (for hiltViewModel and lifecycle aware viewmodels)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.1") // For lifecycleScope, etc.
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.1") // For collecting flows in compose
+
+    // Compose Navigation
+    implementation("androidx.navigation:navigation-compose:2.8.0-beta02") // Use latest stable or beta
+
+    implementation 'javax.annotation:javax.annotation-api:1.3.2'
+
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'com.github.teamnewpipe:NewPipeExtractor:v0.24.6'
+    implementation "androidx.media3:media3-session:1.7.1" // or latest stable
+    //Room
+    def room_version = "2.7.2"
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    ksp "androidx.room:room-compiler:$room_version"
+    //exoPlayer
+    implementation 'androidx.media3:media3-session:1.2.1'
+    implementation 'androidx.media3:media3-ui:1.2.1'
+    implementation 'androidx.media3:media3-common:1.2.1'
+    implementation 'androidx.media3:media3-exoplayer:1.2.1'
+    implementation 'com.google.guava:guava:31.1-android'        // UI equivalent
+
+
+    implementation "com.google.dagger:hilt-android:2.56.2"
+    implementation 'androidx.navigation:navigation-fragment:2.5.3'
+    ksp "com.google.dagger:hilt-compiler:2.56.2"
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0") // Hilt integration for Compose Navigation
+
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.3'
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+}
+
+// Allow references to generated code
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            create("mavenJava", MavenPublication) {
+                groupId = "com.t1h2h0"
+                artifactId = "videos"
+                version = "0.0.1"
+
+            }
+        }
+    }
+}
