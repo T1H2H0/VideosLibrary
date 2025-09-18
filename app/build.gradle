@@ -136,7 +136,7 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "com.t1h2h0"
                 artifactId = "videos"
-                version = "0.0.5"
+                version = "0.0.6"
 
             }
         }
