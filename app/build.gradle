@@ -11,15 +11,15 @@ android {
     namespace 'com.t1h2h0.videos'
     compileSdk 36
 
-    defaultConfig {
-        applicationId "com.t1h2h0.videos"
-        minSdk 26
-        targetSdk 36
-        versionCode 2
-        versionName "0.0.2"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
+//    defaultConfig {
+//        applicationId "com.t1h2h0.videos"
+//        minSdk 26
+//        targetSdk 36
+//        versionCode 2
+//        versionName "0.0.2"
+//
+//        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+//    }
 
     buildTypes {
         release {
@@ -133,7 +133,7 @@ afterEvaluate {
             create("mavenJava", MavenPublication) {
                 groupId = "com.t1h2h0"
                 artifactId = "videos"
-                version = "0.0.2"
+                version = "0.0.3"
 
             }
         }
