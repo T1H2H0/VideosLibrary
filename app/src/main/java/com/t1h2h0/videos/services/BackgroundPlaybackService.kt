@@ -20,6 +20,7 @@ import android.os.Build
 import android.os.IBinder
 import android.util.Log
 import android.view.Surface
+import androidx.annotation.RequiresApi
 import androidx.annotation.RequiresPermission
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -106,6 +107,7 @@ class BackgroundPlaybackService : MediaSessionService() {
         return mediaSession
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val result = super.onStartCommand(intent, flags, startId)
 
@@ -157,6 +159,7 @@ class BackgroundPlaybackService : MediaSessionService() {
         return result
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onDestroy() {
         super.onDestroy()
         Log.d(TAG, "Service onDestroy")
@@ -173,11 +176,11 @@ class BackgroundPlaybackService : MediaSessionService() {
 
         abandonAudioFocus()
         stopForeground(STOP_FOREGROUND_REMOVE)
-        Log.d(TAG, "ExoPlayer and MediaSession released in service.")
+        Log.d(TAG, "ExoPlayer and MediaSession service.")
     }
 
     companion object {
-        private const val TAG = "BackgroundPlaybackService"
+        private const val TAG = "BackgroundPlayService"
         private const val CHANNEL_ID = "background_playback_channel"
         private const val NOTIFICATION_ID = 1
         private const val MEDIA_SESSION_ID = "BackgroundPlaybackService"
@@ -259,6 +262,7 @@ class BackgroundPlaybackService : MediaSessionService() {
 
     // Update broadcast receiver to use ExoPlayer directly
     private val mediaReceiver = object : BroadcastReceiver() {
+        @RequiresApi(Build.VERSION_CODES.FROYO)
         override fun onReceive(context: Context?, intent: Intent?) {
             Log.d(TAG, "MediaReceiver received action: ${intent?.action}")
             when (intent?.action) {
@@ -381,6 +385,7 @@ class BackgroundPlaybackService : MediaSessionService() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.FROYO)
     private fun requestAudioFocus(): Boolean {
         return try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -436,6 +441,7 @@ class BackgroundPlaybackService : MediaSessionService() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.FROYO)
     private fun abandonAudioFocus() {
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.library'
+//    id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 id'com.google.devtools.ksp'
     id 'com.google.dagger.hilt.android'
@@ -8,18 +9,18 @@ id 'maven-publish'
 }
 
 android {
-    namespace 'com.t1h2h0.videos'
-    compileSdk 36
+    namespace ='com.t1h2h0.videos'
+    compileSdk = 36
 
-//    defaultConfig {
-//        applicationId "com.t1h2h0.videos"
-//        minSdk 26
-//        targetSdk 36
-//        versionCode 2
-//        versionName "0.0.2"
+    defaultConfig {
+//        applicationId ="com.t1h2h0.videos"
+        minSdk= 26
+        targetSdk= 36
+//        versionCode= 2
+//        versionName ="0.0.2"
 //
 //        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-//    }
+    }
 
     buildTypes {
         release {
@@ -42,6 +43,7 @@ android {
         // OR if you need more advanced data binding features:
         // dataBinding = true
         compose = true // Enable Jetpack Compose
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.7.0" // Match your Kotlin version and Compose compatibility
@@ -131,9 +133,10 @@ afterEvaluate {
     publishing {
         publications {
             create("mavenJava", MavenPublication) {
+                from(components["release"])
                 groupId = "com.t1h2h0"
                 artifactId = "videos"
-                version = "0.0.3"
+                version = "0.0.4"
 
             }
         }

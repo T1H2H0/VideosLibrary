@@ -77,6 +77,9 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.PlaylistAdd
+import androidx.compose.material.icons.automirrored.filled.PlaylistPlay
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -322,7 +325,7 @@ fun PlayerOverlay(
                 .padding(16.dp)
         ) {
             Icon(
-                imageVector = Icons.Default.ArrowBack,
+                imageVector = Icons.AutoMirrored.Default.ArrowBack,
                 contentDescription = "Back",
                 tint = Color.White,
                 modifier = Modifier.clickable { onClosePlayer() }
@@ -350,7 +353,7 @@ fun PlayerOverlay(
             Spacer(modifier = Modifier.width(16.dp))
 
             Icon(
-                imageVector = Icons.Default.PlaylistAdd,
+                imageVector = Icons.AutoMirrored.Default.PlaylistAdd,
                 contentDescription = "Add to Playlist",
                 tint = Color.White,
                 modifier = Modifier.clickable {
@@ -364,7 +367,7 @@ fun PlayerOverlay(
             Spacer(modifier = Modifier.width(16.dp))
 
             Icon(
-                imageVector = Icons.Default.PlaylistPlay,
+                imageVector = Icons.AutoMirrored.Default.PlaylistPlay,
                 contentDescription = "Playlist",
                 tint = Color.White,
                 modifier = Modifier.clickable {
